@@ -23,7 +23,6 @@
    <a href="https://github.com/simonong4/AI-Typer-Agent/pulls">
     <img src="https://img.shields.io/badge/Contribute-Pull%20Request-green.svg" alt="Contribute">
   </a>
-
 </div>
 
 <br>
@@ -56,28 +55,81 @@ AI Typer Agent is an intelligent automation tool designed to streamline typing t
 ### 💻 Ubuntu (Streamlit UI)
 
 1.  Clone the repository:
+    ```bash
+    git clone https://github.com/simonong4/AI-Typer-Agent.git
+    cd AI-Typer-Agent
+    ```
 
-bash
+2.  Create and activate a virtual environment:
+    ```bash
     python -m venv venv
-    source venv/bin/activate  # On Linux
-    venv\Scripts\activate  # On Windows
-    bash
-    python -m venv venv
-    venv\Scripts\activate  # On Windows
-    4.  Run the CustomTkinter app:
+    source venv/bin/activate
+    ```
 
-    
-> API_KEY=your_api_key
-> BROWSER=chromium
-> > We welcome contributions to the AI Typer Agent project! To contribute:
->
-> 1.  Fork the repository.
-> 2.  Create a new branch for your feature or bug fix.
-> 3.  Implement your changes.
-> 4.  Test your changes thoroughly.
-> 5.  Submit a pull request with a clear description of your changes.
->
-> Please follow our [Code of Conduct](link_to_code_of_conduct) when contributing to this project.  Replace `link_to_code_of_conduct` with the actual link to your code of conduct.
+3.  Install dependencies:
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4.  Install Playwright browsers:
+    ```bash
+    playwright install
+    ```
+
+5.  Run the Streamlit app:
+    ```bash
+    streamlit run app.py
+    ```
+
+### 🖥️ Windows (CustomTkinter UI)
+
+1.  Clone the repository:
+    ```bash
+    git clone https://github.com/simonong4/AI-Typer-Agent.git
+    cd AI-Typer-Agent
+    ```
+
+2.  Create and activate a virtual environment:
+    ```bash
+    python -m venv venv
+    venv\Scripts\activate
+    ```
+
+3.  Install dependencies:
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4.  Install Playwright browsers:
+    ```bash
+    playwright install
+    ```
+
+5.  Run the CustomTkinter app:
+    ```bash
+    python windows_app.py
+    ```
+
+## ⚙️ Configuration
+
+Create a `.env` file in the root directory with the following variables:
+
+```
+API_KEY=your_api_key
+BROWSER=chromium
+```
+
+## 🤝 Contributing
+
+We welcome contributions to the AI Typer Agent project! To contribute:
+
+1.  Fork the repository.
+2.  Create a new branch for your feature or bug fix.
+3.  Implement your changes.
+4.  Test your changes thoroughly.
+5.  Submit a pull request with a clear description of your changes.
+
+Please follow our [Code of Conduct](link_to_code_of_conduct) when contributing to this project.
 
 ## 📜 License
 
@@ -92,7 +144,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📧 Contact
 
-> Add your contact information here (e.g., email, project website).  For example:
->
-> *   Email: your_email@example.com
-> *   Website: [https://yourwebsite.com](https://yourwebsite.com)
+*   Email: your_email@example.com
+*   Website: [https://luco.com](https://luco.com)
