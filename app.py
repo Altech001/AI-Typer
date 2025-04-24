@@ -1124,19 +1124,20 @@ class VClassAITyper(ctk.CTk):
             model_name = self.model_var.get()
             
             # Create alert for countdown
-            countdown_dialog = CTkMessagebox(
-                title="Prepare Your Cursor",
-                message="Typing will begin in 5 seconds...\nPosition your cursor where typing should start!",
-                icon="info",
-                option_1="Cancel"
-            )
+            # countdown_dialog = CTkMessagebox(
+            #     title="Prepare Your Cursor",
+            #     message="Typing will begin in 5 seconds...\nPosition your cursor where typing should start!",
+            #     icon="info",
+            #     option_1="Cancel"
+            # )
             
             # Start countdown
             for i in range(5, 0, -1):
-                countdown_dialog.configure(message=f"Typing will begin in {i} seconds...\nPosition your cursor where typing should start!")
+                print(f"Typing will begin in {i} seconds...\nPosition your cursor where typing should start!")
+                # countdown_dialog.configure(message=f"Typing will begin in {i} seconds...\nPosition your cursor where typing should start!")
                 time.sleep(1)
             
-            countdown_dialog.destroy()
+            # countdown_dialog.destroy()
             
             # Get cursor position
             mouse = MouseController()

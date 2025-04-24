@@ -25,7 +25,7 @@ logger = logging.getLogger(__name__)
 
 # Page configuration
 st.set_page_config(
-    page_title="VClass AI Typer",
+    page_title="AI Typer",
     layout="centered",
     initial_sidebar_state="expanded",
     page_icon="🚀",
@@ -42,7 +42,7 @@ if 'screenshots' not in st.session_state:
 
 # Sidebar 
 with st.sidebar:
-    st.title("VClass AI Typer Agent")
+    st.title("AI Typer Agent")
     st.caption("This is an automation Tool that automates to type characters from the given document")
     st.header("Settings")
     
@@ -167,7 +167,7 @@ with st.sidebar:
 col1, col2 = st.columns([8, 2])
 
 with col1:
-    st.title("VClass AI JailBreaker")
+    st.title("AI Breaker")
 
 with col2:
     if st.button("💬", help="Show Info Dialog"):

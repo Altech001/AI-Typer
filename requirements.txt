@@ -7,3 +7,6 @@ language_tool_python
 pydantic-ai
 pydantic
 python-dotenv
+pillow
+pynput
+keyboard

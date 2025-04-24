@@ -1,4 +1,4 @@
-#!/home/altech/Desktop/typer_ai/.venv/bin/python3
+#!/home/altech/Desktop/.typer_ai/.venv/bin/python3
 
 import sys
 import json

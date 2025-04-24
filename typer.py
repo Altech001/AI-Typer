@@ -69,6 +69,108 @@ class DocumentRetyper:
             traceback.print_exc()
         
         return result.data.content
+    
+    # function for CTK only 
+    # In typer.py, within the DocumentRetyper class
+    # async def retype_document_for_ctk(self, document_text: str, typing_position=None, error_correction=True):
+    #     """Function to retype a document using real keyboard inputs for Customtkinter app, without progress tracking."""
+    #     import logging
+    #     logger = logging.getLogger(__name__)
+        
+    #     logger.info("Starting retype_document_for_ctk...")
+    #     content = DocumentContent(text=document_text)
+        
+    #     # Just show a simple message in terminal
+    #     print(f"Reading document content...")
+    #     logger.info("Reading document content...")
+        
+    #     # Run the agent silently
+    #     logger.info("Calling document_retyper.run...")
+    #     result = await self.document_retyper.run(
+    #         f"Please retype the following document exactly as it is, preserving all formatting, spacing,"
+    #         f" line breaks, and paragraph structure: {content.text}"
+    #     )
+    #     logger.info("document_retyper.run completed.")
+        
+    #     # Perform real keyboard typing with formatting support
+    #     try:
+    #         logger.info("Checking for formatting markers...")
+    #         # Check if the content likely has formatting markers
+    #         if "**" in result.data.content or "__" in result.data.content or "_" in result.data.content:
+    #             logger.info("Using type_with_formatting...")
+    #             # Use the enhanced typing with formatting method, without progress_tracker
+    #             await self.keyboard_typer.type_with_formatting(result.data.content, typing_position)
+    #             logger.info("type_with_formatting completed.")
+    #         else:
+    #             logger.info("Using type_with_verification...")
+    #             # Use the regular typing with verification method, without progress_tracker
+    #             await self.keyboard_typer.type_with_verification(result.data.content, typing_position, error_correction)
+    #             logger.info("type_with_verification completed.")
+    #         print(f"\nDocument successfully retyped using real keyboard inputs!")
+    #         logger.info("Document successfully retyped.")
+    #     except Exception as e:
+    #         print(f"Error during typing: {str(e)}")
+    #         logger.error(f"Error during typing: {str(e)}")
+    #         raise  # Re-raise the exception to be handled by the caller
+        
+    #     return result.data.content
+# In typer.py, within the DocumentRetyper class
+    async def retype_document_for_ctk(self, document_text: str, typing_position=None, error_correction=True):
+        """Function to retype a document using real keyboard inputs for Customtkinter app, without progress tracking."""
+        import logging
+        import traceback
+        logger = logging.getLogger(__name__)
+        
+        logger.info("Starting retype_document_for_ctk...")
+        content = DocumentContent(text=document_text)
+        
+        # Just show a simple message in terminal
+        print(f"Reading document content...")
+        logger.info("Reading document content...")
+        
+        # Run the agent silently with a timeout
+        logger.info("Calling document_retyper.run...")
+        try:
+            result = await asyncio.wait_for(
+                self.document_retyper.run(
+                    f"Please retype the following document exactly as it is, preserving all formatting, spacing,"
+                    f" line breaks, and paragraph structure: {content.text}"
+                ),
+                timeout=30  # Timeout after 30 seconds
+            )
+            logger.info("document_retyper.run completed.")
+            logger.debug(f"Result from document_retyper.run: {result.data.content[:100]}...")  # Log first 100 chars of result
+        except asyncio.TimeoutError:
+            logger.error("API call to document_retyper.run timed out after 30 seconds.")
+            raise Exception("API call timed out. Please check your network connection and try again.")
+        except Exception as e:
+            logger.error(f"Error during document_retyper.run: {str(e)}")
+            logger.debug(traceback.format_exc())
+            raise Exception(f"Failed to process document with AI model: {str(e)}")
+        
+        # Perform real keyboard typing with formatting support
+        try:
+            logger.info("Checking for formatting markers...")
+            # Check if the content likely has formatting markers
+            if "**" in result.data.content or "__" in result.data.content or "_" in result.data.content:
+                logger.info("Using type_with_formatting...")
+                # Use the enhanced typing with formatting method, without progress_tracker
+                await self.keyboard_typer.type_with_formatting(result.data.content, typing_position)
+                logger.info("type_with_formatting completed.")
+            else:
+                logger.info("Using type_with_verification...")
+                # Use the regular typing with verification method, without progress_tracker
+                await self.keyboard_typer.type_with_verification(result.data.content, typing_position, error_correction)
+                logger.info("type_with_verification completed.")
+            print(f"\nDocument successfully retyped using real keyboard inputs!")
+            logger.info("Document successfully retyped.")
+        except Exception as e:
+            print(f"Error during typing: {str(e)}")
+            logger.error(f"Error during typing: {str(e)}")
+            logger.debug(traceback.format_exc())
+            raise  # Re-raise the exception to be handled by the caller
+        
+        return result.data.content
 
     async def display_document_info(self, file_path: str):
         """Display basic document info without typing the content"""
