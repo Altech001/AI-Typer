@@ -1,3 +1,4 @@
+import asyncio
 from breaker import RealKeyboardTyper
 from models import DocumentContent, RetypedDocument
 from pydantic_ai import Agent
@@ -17,7 +18,7 @@ task_desp = open("system_prompt.txt", "r").read()
 
 class DocumentRetyper:
     """Class to retype documents with real keyboard typing"""
-    def __init__(self, delay=0.01,model_name: str = 'google-gla:gemini-2.0-flash'):
+    def __init__(self, delay=0.005,model_name: str = 'google-gla:gemini-2.0-flash'):
         self.model_name = model_name
         self.document_retyper = None
         self.keyboard_typer = RealKeyboardTyper(delay=delay)  # Use the configurable delay

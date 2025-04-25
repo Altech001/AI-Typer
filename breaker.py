@@ -10,7 +10,7 @@ import keyboard
 
 class RealKeyboardTyper:
     """Class to perform real keyboard typing using pynput with error correction"""
-    def __init__(self, delay=0.01, verify_interval=100):  # Slightly slower for reliability
+    def __init__(self, delay=0.005, verify_interval=1000):  # Slightly slower for reliability
         self.keyboard = KeyboardController()
         self.mouse = MouseController()
         self.grammar_checker = GrammarChecker()
@@ -23,7 +23,7 @@ class RealKeyboardTyper:
         with self.keyboard.pressed(Key.ctrl):
             self.keyboard.press('b')
             self.keyboard.release('b')
-        time.sleep(0.1)
+        time.sleep(0.005)
 
     def toggle_underline(self):
         """Toggle underline formatting using Ctrl+U shortcut"""
@@ -46,16 +46,16 @@ class RealKeyboardTyper:
             old_pos = self.mouse.position
             # Move to target position
             self.mouse.position = position
-            time.sleep(0.1)
+            time.sleep(0.005)
             # Click to focus
             self.mouse.click(Button.left)
-            time.sleep(0.1)
+            time.sleep(0.005)
             # Return to original position to avoid interference
             self.mouse.position = old_pos
         else:
             # Just click at current position
             self.mouse.click(Button.left)
-            time.sleep(0.1)
+            time.sleep(0.005)
     
     def select_all_and_delete(self):
         """Select all text and delete it to start fresh"""
